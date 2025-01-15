@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="myscripts.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+    <title>Page Title</title>
+    <style>
+        /* Positioning the Inventory button */
+        #inventory-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 15px 35px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #inventory-button:hover {
+            background-color: #0056b3;
+        }
+
+        #click-instruction {
+            font-size: 32px;
+            color: #f5e347;
+            margin-top: 10px;
+            font-family: Georgia, serif;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Inventory Button -->
+    <button id="inventory-button">Inventory</button>
+    
+    <div id="treasure-chest-container">
+        <img id="loot" src="loot.png" alt="Pile of Loot" />
+        <img id="chest" src="commonChest.png" alt="Treasure Chest" style="display:none;" />
+        <p id="click-instruction">Click the loot to unlock your daily chest!</p>
+        <p id="treasure-message" style="display: none;">💰 You found treasure! 💰</p>
+    </div>
+
+    <script>
+
+        if (!localStorage.getItem("obtainedChests")) {
+            localStorage.setItem("obtainedChests", JSON.stringify([]));
+        }
+
+        // Add an event listener to get rid of click-instruction
+        document.getElementById("loot").addEventListener("click", function() {
+            document.getElementById("click-instruction").style.display = "none";
+
+            // Stop animation
+            this.style.animation = "none";
+
+            // Reveal and animate the chest
+            const chest = document.getElementById("chest");
+            chest.classList.add("show");
+        })
+    </script>
+</body>
+
+</html>
